@@ -1,0 +1,22 @@
+<form class="ddf-form" [formGroup]="myForm">
+  <fieldset *ngFor="let fieldset of model.fieldsets">
+    <legend [innerHTML]="fieldset.legend"></legend>
+    <ng-container *ngFor="let control of fieldset.controls">
+      <ng-container [ngSwitch]="control.type">
+        <div *ngSwitchCase="'text'">
+          <label [for]="control.key" [innerHTML]="control.label"></label>
+          <input type="text" [placeholder]="control.placeholder" [formControlName]="control.key" [id]="control.key"
+            (input)="control.events?.input($event.currentTarget)" (focus)="control.events?.focus($event)"
+            (blur)="control.events?.blur($event)">
+        </div>
+        <div *ngSwitchDefault>
+          {{ control.type }}
+          <span>Control type : {{ control.type }}. Please, consider develop it </span>
+        </div>
+      </ng-container>
+
+    </ng-container>
+  </fieldset>
+</form>
+
+<p>{{ myForm.value | json }}</p>
