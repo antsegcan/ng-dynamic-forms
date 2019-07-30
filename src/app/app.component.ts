@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DynamicFormFactoryService } from './dynamic-form-factory.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,7 @@ export class AppComponent implements OnInit {
   public model;
   public myForm: FormGroup;
 
-  constructor(private dynamicForm: DynamicFormFactoryService) { }
+  constructor() { }
 
   ngOnInit() {
     this.model = {
@@ -62,7 +61,10 @@ export class AppComponent implements OnInit {
       ]
     }
 
-    this.myForm = this.dynamicForm.createForm(this.model);
+  }
+
+  public getForm(form: FormGroup) {
+    this.myForm = form;
   }
 
 
